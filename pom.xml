@@ -7,28 +7,8 @@
   <version>1.0-SNAPSHOT</version>
   <name>demo Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  <distributionManagement>
-                <repository>
-                    <id>internalMavenReleaseRepository</id>
-                    <name>Internal Maven Release Repository</name>
-                    <url>http://10.60.8.8:8082/repository/devops-releases/</url>
-                </repository>
-        <snapshotRepository>
-            <id>internalMavenSnapshotRepository</id>
-            <name>Internal Snapshots Repository</name>
-            <url>http://10.60.8.8:8082/repository/devops-snapshots/</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-            </distributionManagement>
-  <properties>
-    <releases.distribution.url>            
-      http://10.60.8.8:8082/repository/devops-releases/  
- </releases.distribution.url>        
-<snapshots.distribution.url>            
-http://10.60.8.8:8082/repository/devops-snapshots/   
-</snapshots.distribution.url>
 
-  </properties>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
