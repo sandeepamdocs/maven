@@ -7,6 +7,15 @@
   <version>1.0-SNAPSHOT</version>
   <name>demo Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  <properties>
+    <releases.distribution.url>            
+      http://10.60.8.8:8082/repository/devops-releases/  
+ </releases.distribution.url>        
+<snapshots.distribution.url>            
+http://10.60.8.8:8082/repository/devops-snapshots/   
+</snapshots.distribution.url>
+
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
