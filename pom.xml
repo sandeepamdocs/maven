@@ -8,41 +8,9 @@
   <name>demo Maven Webapp</name>
   <url>http://maven.apache.org</url>
   
-  <distributionManagement>
+  
 
 
-                <repository>
-                    <id>internalMavenReleaseRepository</id>
-                    <name>Internal Maven Release Repository</name>
-                    <url>http://10.60.8.8:8082/repository/training-releases</url>
-                </repository>
-
-
-
-		<snapshotRepository>
-            <id>internalMavenSnapshotRepository</id>
-            <name>Internal Snapshots Repository</name>
-            <url>http://10.60.8.8:8082/repository/training-snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-
-
-
-</distributionManagement>
-
-<properties>
-
- <repository.server.root>http://10.60.8.8:8082/repository</repository.server.root>
- 
- <releases.distribution.url>
-       ${repository.server.root}/training-releases/
- </releases.distribution.url>
- 
- <snapshots.distribution.url>
-       ${repository.server.root}/training-snapshots/
- </snapshots.distribution.url>
-		
-</properties>
 
   
   <dependencies>
