@@ -15,6 +15,10 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <properties>
+  <sonar.host.url>http://18.222.255.218:9000</sonar.host.url>
+  </properties>
+  
    
   <build>
   <plugins>
