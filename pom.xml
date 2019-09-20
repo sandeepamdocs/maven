@@ -24,12 +24,12 @@
     <repository>
         <id>InternalReleases</id>
         <name>Internal Releases</name>
-        <url>http://34.229.173.80:8081/repository/maven-releases/</url>
+        <url>http://34.227.31.206:8081/repository/maven-releases/</url>
     </repository>
     <snapshotRepository>
         <id>InternalSnapshots</id>
         <name>Internal Snapshots</name>
-        <url>http://34.229.173.80:8081/repository/maven-snapshots/</url>
+        <url>http://34.227.31.206:8081/repository/maven-snapshots/</url>
     </snapshotRepository>
 </distributionManagement>
 </project> 
