@@ -4,7 +4,7 @@
   <groupId>com.org</groupId>
   <artifactId>demo</artifactId>
   <packaging>war</packaging>
-  <version>2019.99.1</version>
+  <version>2019.99.1-SNAPSHOT</version>
   <name>demo Maven Webapp</name>
   <url>http://maven.apache.org</url>  
   
