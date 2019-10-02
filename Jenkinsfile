@@ -6,6 +6,7 @@ options{
 buildDiscarder(logRotator(numToKeepStr: '10'))
   discardConcurrentBuild()
 // adds timestamps to build logs
+  timestamps()
 }
 tools
 {
