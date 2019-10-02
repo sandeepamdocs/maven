@@ -5,11 +5,12 @@ options{
 buildDiscarder(logRotator(numToKeepStr: '10'))
   discardConcurrentBuild()
 // adds timestamps to build logs
+timestamps()
 }
 tools
 {
 jdk 'JDK_1.8.0-222'
-maven 'Maven-Dedicated-Slaves-Only'
+gradle 'Gradle Version'
 }
 stages
 {
