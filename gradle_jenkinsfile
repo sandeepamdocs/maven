@@ -92,3 +92,40 @@ steps
 sh 'echo "publish"'
 // publish
 
+withCredentials([usernamePassword(credentialId: "artifact id" passwordVariable:'RELEASE_DEPLOY_PWD" usernameVariable:'RELEASE_DEPLOY_ID')])
+{
+bat """ gradle -P username=$RELEASE_DEPLOY_ID -P password=$RELEASE_DEPLOY_PWD --project-prop repositoryName=maven-release --projcet-prop publishSuffix= --project-prop version=${currentBuild.displayName} clean build publish -X tyest """
+}
+}
+}
+stage (' Trigger import of component version')
+                                            
+    {
+      when
+      {
+        expression
+        {
+          return env. UDEPLOY_COMPONENT_ID!='';
+        }
+      }
+      steps
+      {
+        sh 'echo"import version for component"'
+        withCredentials([usernamePassword(credentialsId: 'UDEPLOY credentials id' usernameVariable: 'UDEPLOY_USER' passwordVariable: 'UDEPLOY_PWD')])
+        {
+          sh """ curl -k -u ${UDEPLOY_USER}:${UDEPLOY_PWD} https://udeploy.con:8443/cli/component/integrate -X put -d {"component:${COMPONENT_ID}"}
+          }
+          sleep 10
+          }
+          }
+          }
+          }
+
+
+
+
+
+
+
+
+
