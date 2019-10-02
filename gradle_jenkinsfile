@@ -95,6 +95,8 @@ sh 'echo "publish"'
 withCredentials([usernamePassword(credentialId: "artifact id" passwordVariable:'RELEASE_DEPLOY_PWD" usernameVariable:'RELEASE_DEPLOY_ID')])
 {
 bat """ gradle -P username=$RELEASE_DEPLOY_ID -P password=$RELEASE_DEPLOY_PWD --project-prop repositoryName=maven-release --projcet-prop publishSuffix= --project-prop version=${currentBuild.displayName} clean build publish -X tyest """
+// --build-file build-template.gradle buildVersion=${NEXUS_VERSION}-${GIT_SIMPLE} clean build runBuild war publish """
+
 }
 }
 }
