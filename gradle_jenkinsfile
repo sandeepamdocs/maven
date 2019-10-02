@@ -58,3 +58,37 @@ BRANCH_NAME=sh(script:"echo $GIT_BRANCH|sed -e 's|origin/||g'",returnStdout:true
   }
 }
 }
+stage(build')
+{
+steps
+{
+//build without tests
+sh 'echo"building code"'
+sh ' gradle clean build -X test'
+}
+}
+stage('test')
+{
+steps
+{
+//run gradle tests
+sh ' echo"running test"'
+sh 'gradle test'
+}
+post
+{
+always
+{
+sh 'echo"publish test results"'
+//publish junit test results
+// junit '**/build/test-reports/*.xml'
+}
+}
+}
+stage('publish')
+{
+steps
+{
+sh 'echo "publish"'
+// publish
+
