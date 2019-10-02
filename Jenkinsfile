@@ -4,6 +4,7 @@ agent{label 'labelname'}
 options{
 // only keeps the last 10 builds of this pipelone
 buildDiscarder(logRotator(numToKeepStr: '10'))
+  discardConcurrentBuild()
 // adds timestamps to build logs
 }
 tools
