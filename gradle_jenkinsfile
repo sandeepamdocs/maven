@@ -124,6 +124,27 @@ stage (' Trigger import of component version')
           }
 
 
+/// Bat command using GIT_SIMPLE , NEXUS_VERSION_GIT_COMMIT MAJOR AND MINOTR VERSION declartion
+
+GIT_COMMIT = bat (returnStdout:true, script:"sh -x -c \"git rev-parse HEAD \"").trim().split('\n')[1]
+echo " GIT_COMMIT:$GIT_COMMIT}"
+NEXUS_VERSION= bat (returnStdout:true, script:"sh -x -c \"git-list ${GIT_COMMIT} --count \"").trim().split('\n')[1]
+echo "NEXUS_VERSION: ${NEXUS_VERSION}
+GIT_SIMPLE = bat (returnStdout:true, script:"sh -x -c \"git-list ${GIT_COMMIT}|head -n 1 | cut -c 1-7 \"").trim().split('\n')[1]
+echo "GIT_SIMPLE: ${GIT_SIMPLE}
+mv1 = bat (returnStdout:true, script:"sh -x -c \" echo ${BUILD_VERSION} |cut -d. -f1 \"").trim().split('\n')[1]
+mv2 = bat (returnStdout:true, script:"sh -x -c \" echo ${BUILD_VERSION} |cut -d. -f2 \"").trim().split('\n')[1]
+majorVersion = mv1 + "."+mv2
+echo "majorVersion:${majorVersion}"
+minorVersion = bat (returnStdout:true, script:"sh -x -c \" echo ${BUILD_VERSION} |cut -d. -f3 \"").trim().split('\n')[1]
+echo "minorVersion:${minorVersion}"
+
+
+
+
+
+
+
 
 
 
