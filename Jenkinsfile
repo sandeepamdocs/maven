@@ -82,8 +82,69 @@ BRANCH_NAME=sh(script:"echo $GIT_BRANCH|sed -e 's|origin/||g'",returnStdout:true
             { 
          configFileProvider([configFile(fileId: 'articatory-global-settings-file', variable: 'ArtifactoryGlobalSettings')])
               {
-                sh """ mvn -B -s $ArtifactoryGlobalSettings -Drelease_deployer_id=$RELEASE_DEPLOY_ID -Drelease_deployer_pwd=$RELEASE_DEPLOY_PWD -Dsnapshot_deployer_id=$SNAPSHOT_DEPLOY_ID -Dsnapshot_deployer_pwd=$SNAPSHOT_DEPLOY_PWD  
-                                          
+                sh """ mvn -B -s $ArtifactoryGlobalSettings -Drelease_deployer_id=$RELEASE_DEPLOY_ID -Drelease_deployer_pwd=$RELEASE_DEPLOY_PWD -Dsnapshot_deployer_id=$SNAPSHOT_DEPLOY_ID -Dsnapshot_deployer_pwd=$SNAPSHOT_DEPLOY_PWD clean deploy -Dmaven.test.skop -Passmebly """
+              }
+            }
+            }
+            }
+           }
+                                              
+    stage ('pre-relaese')
+       {
+         steps
+         {
+           // set build bversion
+           sh 'echo "replacing SNAPSHOT with release number in pom.xml "'
+           configFileProvider([configFile(fileId: 'articatory-global-settings-file', variable: 'ArtifactoryGlobalSettings')])
+           {
+             sh """ mvn versions: set -B -DnewVersion =${BUILD_VERSION}.${NEXUS_VERSION}-${GIT_SIMPLE}"""
+           }
+         }
+       }
+        
+     stage('publish")
+           {
+             steps
+             {
+               sh 'echo"deploy appllictaion"'
+               
+     withCredentials([usernamePassword(credentialId: "artifact id" passwordVariable:'RELEASE_DEPLOY_PWD" usernameVariable:'RELEASE_DEPLOY_ID')])
+            {
+            withCredentials([usernamePassword(credentialId: "artifact id" passwordVariable:'SNAPSHOT_DEPLOY_PWD" usernameVariable:'SNAPSHOT_DEPLOY_ID')])
+            { 
+         configFileProvider([configFile(fileId: 'articatory-global-settings-file', variable: 'ArtifactoryGlobalSettings')])
+              {
+                sh """ mvn -B -s $ArtifactoryGlobalSettings -Drelease_deployer_id=$RELEASE_DEPLOY_ID -Drelease_deployer_pwd=$RELEASE_DEPLOY_PWD -Dsnapshot_deployer_id=$SNAPSHOT_DEPLOY_ID -Dsnapshot_deployer_pwd=$SNAPSHOT_DEPLOY_PWD clean deploy -Dmaven.test.skop -Passmebly """
+              }
+            }
+            }
+            }
+           }
+   stage (' Trigger import of component version')
+                                            
+    {
+      when
+      {
+        expression
+        {
+          return env. UDEPLOY_COMPONENT_ID!='';
+        }
+      }
+      steps
+      {
+        sh 'echo"import version for component"'
+        withCredentials([usernamePassword(credentialsId: 'UDEPLOY credentials id' usernameVariable: 'UDEPLOY_USER' passwordVariable: 'UDEPLOY_PWD')])
+        {
+          sh """ curl -k -u ${UDEPLOY_USER}:${UDEPLOY_PWD} https://udeploy.con:8443/cli/component/integrate -X put -d {"component:${COMPONENT_ID}"}
+          }
+          sleep 10
+          }
+          }
+          }
+          }
+      
+                               
+                                           
                                               
                                               
                                               
