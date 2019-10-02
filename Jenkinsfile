@@ -38,7 +38,74 @@ BRANCH_NAME=sh(script:"echo $GIT_BRANCH|sed -e 's|origin/||g'",returnStdout:true
   GIT_COMMIT=sh([script: "git rev-parse HEAD",returnStdout:true]).trim()
   NEXUS_VERSION=sh([script: "git rev-list ${GIT_COMMIT} --count",returnStdout:true]).trim()
   GIT_SIMPLE=sh([script: "git rev-list ${GIT_COMMIT} |head -n 1 |cut -c 1-5",returnStdout:true]).trim()
-  
+  //get latest successful build name
+  build =currentBuild
+  while(build!=null && build.result !='SUCCESS')
+  build=build.previousBuild
+}
+    if (build==null)
+    {
+      //this means there has not been a success fill build yet
+      PREVIOUS_BUILD_VERSION='none'
+    }
+    else
+    {
+      PREVIOUS_BUILD_VERSION=build.displayName
+    }
+    echo "LAST SUCCESS BUILD NAME: ${PREVIOUS_BUILD_VERSION}"
+    //srt jenkisn build name to be same as artifact version that will be published
+    currentBuild.displayName="${BUILD_VERSION}.${NEXUS_VERSION}-${GIT_SIMPLE}"
+  }
+}
+}
+  stage('pre-build")
+        {
+          steps
+          {
+            //set build version for projcet componet 
+            sh 'echo "Updating pom version"'
+            echo"BUILD_VERSION=${BUILD_VERSION}"
+            configFileProvider([configFile(fileId: 'articatory-global-settings-file', variable: 'ArtifactoryGlobalSettings')])
+            sh """mvn versions: set -DnewVersion=${BUILD_VERSION}-SNAPSHOT -B """
+          }
+        }
+        }
+        stage('build')
+        {
+          steps
+          {
+            // build project without tests
+            sh 'echo "deploying SNAPSHOT CODE"'
+            withCredentials([usernamePassword(credentialId: "artifact id" passwordVariable:'RELEASE_DEPLOY_PWD" usernameVariable:'RELEASE_DEPLOY_ID')])
+            {
+              
+                                          
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
   
   
   
