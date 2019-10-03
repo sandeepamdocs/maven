@@ -9,9 +9,19 @@
   <url>http://maven.apache.org</url>  
   
   <properties>
-    <sonar.host.url>http://192.168.13.130:9000</sonar.host.url>
+    <sonar.host.url>http://52.205.194.7:9000</sonar.host.url>
   </properties>
- 
+ <build>
+    <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.4.0.905</version>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+</build>
  <dependencies>
     <dependency>
       <groupId>junit</groupId>
